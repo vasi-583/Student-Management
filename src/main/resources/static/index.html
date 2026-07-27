@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Student Management</h1>
+            <button id="logoutBtn">Logout</button>
+        </div>
+
+        <input type="text" id="searchInput" placeholder="Search by name or course...">
+
+        <form id="studentForm">
+            <input type="hidden" id="studentId">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="course" placeholder="Course" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit" id="submitBtn">Add Student</button>
+        </form>
+
+        <table id="studentTable">
+            <thead>
+                <tr><th>ID</th><th>Name</th><th>Course</th><th>Email</th><th>Actions</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
