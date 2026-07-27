@@ -1,83 +1,38 @@
 package com.vasi.model;
 
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="students")
+@Table(name = "students")
 public class Student {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(nullable=false)
-	private String name;
-	
-	
-	private String course;
-	
-	@Column (unique=true)
-	private String email;
-	
-	public Student() {
-		
-	}
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public Student( String name, String course ,String email) {
-		super();
-		
-		this.name = name;
-		this.course = course;
-		this.email=email;
-	}
+    @Column(nullable = false)
+    private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-	public int getId() {
-		return id;
-	}
+    @Column(unique = true)
+    private String email;
 
+    public Student() {}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Student(String name, Course course, String email) {
+        this.name = name;
+        this.course = course;
+        this.email = email;
+    }
 
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public String getCourse() {
-		return course;
-	}
-
-
-	public void setCourse(String course) {
-		this.course = course;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
-	public String toString() {
-		return "ID:" + id + "| Name: " + name + "| Course: "+ course + "|Email: "+ email;
-	}
-	
-	
-	
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public Course getCourse() { return course; }
+    public void setCourse(Course course) { this.course = course; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 }

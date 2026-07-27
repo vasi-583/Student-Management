@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses - Student Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Manage Courses</h1>
+            <div>
+                <a href="index.html"><button type="button">Students</button></a>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </div>
+
+        <form id="courseForm">
+            <input type="hidden" id="courseId">
+            <input type="text" id="courseName" placeholder="Course Name" required>
+            <input type="text" id="courseDescription" placeholder="Description">
+            <button type="submit" id="submitBtn">Add Course</button>
+        </form>
+
+        <table id="courseTable">
+            <thead>
+                <tr><th>ID</th><th>Name</th><th>Description</th><th>Actions</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="courses.js"></script>
+</body>
+</html>

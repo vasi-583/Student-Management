@@ -30,18 +30,20 @@ public class SecurityConfig {
 	        .csrf(csrf -> csrf.disable())
 	        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers(
-	                "/api/auth/**",
-	                "/",
-	                "/index.html",
-	                "/login.html",
-	                "/signup.html",
-	                "/style.css",
-	                "/auth.css",
-	                "/script.js",
-	                "/auth.js",
-	                "/favicon.ico"
-	            ).permitAll()
+	        .requestMatchers(
+	        			    "/api/auth/**",
+	        			    "/",
+	        			    "/index.html",
+	        			    "/login.html",
+	        			    "/signup.html",
+	        			    "/courses.html",
+	        			    "/style.css",
+	        			    "/auth.css",
+	        			    "/script.js",
+	        			    "/auth.js",
+	        			    "/courses.js",
+	        			    "/favicon.ico"
+	        			).permitAll()
 	            .anyRequest().authenticated()
 	        )
 	        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

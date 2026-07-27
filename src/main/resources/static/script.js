@@ -1,4 +1,5 @@
 const API_URL = "http://localhost:8080/api/students";
+const COURSES_URL = "http://localhost:8080/api/courses";
 
 const token = localStorage.getItem("token");
 if (!token) {
@@ -15,8 +16,28 @@ const tableBody = document.querySelector("#studentTable tbody");
 const submitBtn = document.getElementById("submitBtn");
 const searchInput = document.getElementById("searchInput");
 const logoutBtn = document.getElementById("logoutBtn");
+const courseSelect = document.getElementById("course");
 
 let allStudents = [];
+let allCourses = [];
+
+async function loadCourses() {
+    const res = await fetch(COURSES_URL, { headers: authHeaders });
+    if (res.status === 401 || res.status === 403) {
+        localStorage.clear();
+        window.location.href = "login.html";
+        return;
+    }
+    allCourses = await res.json();
+
+    courseSelect.innerHTML = '<option value="">Select Course</option>';
+    allCourses.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c.id;
+        opt.textContent = c.name;
+        courseSelect.appendChild(opt);
+    });
+}
 
 async function loadStudents() {
     const res = await fetch(API_URL, { headers: authHeaders });
@@ -34,14 +55,16 @@ async function loadStudents() {
 function renderTable(students) {
     tableBody.innerHTML = "";
     students.forEach(s => {
+        const courseName = s.course ? s.course.name : "—";
+        const courseId = s.course ? s.course.id : "";
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${s.id}</td>
             <td>${s.name}</td>
-            <td>${s.course}</td>
+            <td>${courseName}</td>
             <td>${s.email}</td>
             <td>
-                <button class="edit" onclick="editStudent(${s.id}, '${s.name}', '${s.course}', '${s.email}')">Edit</button>
+                <button class="edit" onclick='editStudent(${s.id}, "${s.name}", "${courseId}", "${s.email}")'>Edit</button>
                 <button class="delete" onclick="deleteStudent(${s.id})">Delete</button>
             </td>
         `;
@@ -54,7 +77,7 @@ if (searchInput) {
         const query = searchInput.value.toLowerCase();
         const filtered = allStudents.filter(s =>
             s.name.toLowerCase().includes(query) ||
-            s.course.toLowerCase().includes(query)
+            (s.course && s.course.name.toLowerCase().includes(query))
         );
         renderTable(filtered);
     });
@@ -65,8 +88,8 @@ form.addEventListener("submit", async (e) => {
     const id = document.getElementById("studentId").value;
     const student = {
         name: document.getElementById("name").value,
-        course: document.getElementById("course").value,
-        email: document.getElementById("email").value
+        email: document.getElementById("email").value,
+        courseId: parseInt(courseSelect.value)
     };
 
     if (id) {
@@ -89,10 +112,10 @@ form.addEventListener("submit", async (e) => {
     loadStudents();
 });
 
-function editStudent(id, name, course, email) {
+function editStudent(id, name, courseId, email) {
     document.getElementById("studentId").value = id;
     document.getElementById("name").value = name;
-    document.getElementById("course").value = course;
+    courseSelect.value = courseId;
     document.getElementById("email").value = email;
     submitBtn.textContent = "Update Student";
 }
@@ -111,4 +134,4 @@ if (logoutBtn) {
     });
 }
 
-loadStudents();
+loadCourses().then(loadStudents);
