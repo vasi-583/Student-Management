@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Student Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div class="sidebar">
+            <h2>Student MS</h2>
+            <nav>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="index.html">Students</a>
+                <a href="courses.html">Courses</a>
+                <a href="attendance.html" class="active">Attendance</a>
+                <a href="grades.html">Grades</a>
+            </nav>
+            <div class="logout-link" id="logoutBtn">Logout</div>
+        </div>
+
+        <div class="main">
+            <div class="page-header">
+                <h1>Attendance</h1>
+            </div>
+
+            <div class="card">
+                <form id="attendanceForm">
+                    <select id="studentSelect" required>
+                        <option value="">Select Student</option>
+                    </select>
+                    <input type="date" id="attendanceDate" required>
+                    <select id="statusSelect" required>
+                        <option value="PRESENT">Present</option>
+                        <option value="ABSENT">Absent</option>
+                    </select>
+                    <button type="submit">Mark Attendance</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <form style="margin-bottom: 0;">
+                    <label style="margin: 0;">Filter by date:</label>
+                    <input type="date" id="filterDate">
+                    <button id="filterBtn" type="button">Filter</button>
+                    <button id="clearFilterBtn" type="button" class="edit">Show All</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <table id="attendanceTable">
+                    <thead>
+                        <tr><th>ID</th><th>Student</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="attendance.js"></script>
+</body>
+</html>

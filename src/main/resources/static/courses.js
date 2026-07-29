@@ -29,8 +29,12 @@ async function loadCourses() {
 }
 
 function renderTable(courses) {
+    const role = localStorage.getItem("role");
     tableBody.innerHTML = "";
     courses.forEach(c => {
+        const deleteBtn = role === "ADMIN"
+            ? `<button class="delete" onclick="deleteCourse(${c.id})">Delete</button>`
+            : "";
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${c.id}</td>
@@ -38,7 +42,7 @@ function renderTable(courses) {
             <td>${c.description || ""}</td>
             <td>
                 <button class="edit" onclick="editCourse(${c.id}, '${c.name}', '${c.description || ""}')">Edit</button>
-                <button class="delete" onclick="deleteCourse(${c.id})">Delete</button>
+                ${deleteBtn}
             </td>
         `;
         tableBody.appendChild(row);
@@ -93,5 +97,6 @@ if (logoutBtn) {
         window.location.href = "login.html";
     });
 }
+
 
 loadCourses();

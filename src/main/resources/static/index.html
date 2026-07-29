@@ -2,37 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - Student Management</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Student Management</h1>
-            <div>
-                <a href="courses.html"><button type="button">Courses</button></a>
-                <button id="logoutBtn">Logout</button>
-            </div>
+    <div class="layout">
+        <div class="sidebar">
+            <h2>Student MS</h2>
+            <nav>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="index.html" class="active">Students</a>
+                <a href="courses.html">Courses</a>
+                <a href="attendance.html">Attendance</a>
+                <a href="grades.html">Grades</a>
+            </nav>
+            <div class="logout-link" id="logoutBtn">Logout</div>
         </div>
 
-        <input type="text" id="searchInput" placeholder="Search by name or course...">
+        <div class="main">
+            <div class="page-header">
+                <h1>Students</h1>
+            </div>
 
-        <form id="studentForm">
-            <input type="hidden" id="studentId">
-            <input type="text" id="name" placeholder="Name" required>
-            <select id="course" required>
-                <option value="">Select Course</option>
-            </select>
-            <input type="email" id="email" placeholder="Email" required>
-            <button type="submit" id="submitBtn">Add Student</button>
-        </form>
+            <div class="card">
+                <input type="text" id="searchInput" placeholder="Search by name or course...">
+            </div>
 
-        <table id="studentTable">
-            <thead>
-                <tr><th>ID</th><th>Name</th><th>Course</th><th>Email</th><th>Actions</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+            <div class="card">
+                <form id="studentForm">
+                    <input type="hidden" id="studentId">
+                    <input type="text" id="name" placeholder="Name" required>
+                    <select id="course" required>
+                        <option value="">Select Course</option>
+                    </select>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <button type="submit" id="submitBtn">Add Student</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <table id="studentTable">
+                    <thead>
+                        <tr><th>ID</th><th>Name</th><th>Course</th><th>Email</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

@@ -1,56 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-outer: #bcecd9;
+    --bg-canvas: #f8f6f0;
+    --bg-sidebar: #eee9e0;
+    --accent-dark: #18181b;
+    --card-pink: #f7c5c5;
+    --card-peach: #fce4c8;
+    --card-lavender: #d8d6ff;
+    --card-mint: #bdedda;
+    --text-dark: #18181b;
+    --text-muted: #71717a;
+    --border-light: #e4e4e7;
+    --danger: #ef4444;
+    --success: #10b981;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    background-color: var(--bg-outer);
+    color: var(--text-dark);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    position: relative;
+    overflow-x: hidden;
+    padding: 24px;
 }
 
-.auth-container {
-    background: white;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    width: 300px;
-    text-align: center;
-}
-
-.auth-container h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.auth-container input {
+/* Ambient Animated Pastel Spheres */
+.ambient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
 }
 
-.auth-container button {
+.sphere {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+}
+
+.sphere-1 {
+    width: 450px;
+    height: 450px;
+    background: var(--card-pink);
+    top: -100px;
+    left: -100px;
+    animation: softFloat 14s ease-in-out infinite alternate;
+}
+
+.sphere-2 {
+    width: 500px;
+    height: 500px;
+    background: var(--card-lavender);
+    bottom: -120px;
+    right: -100px;
+    animation: softFloat 18s ease-in-out infinite alternate-reverse;
+}
+
+.sphere-3 {
+    width: 380px;
+    height: 380px;
+    background: var(--card-peach);
+    top: 30%;
+    left: 60%;
+    animation: softFloat 12s ease-in-out infinite alternate;
+}
+
+@keyframes softFloat {
+    0% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-30px) scale(1.06); }
+    100% { transform: translateY(20px) scale(0.95); }
+}
+
+/* Auth Canvas Container */
+.auth-canvas {
+    position: relative;
+    z-index: 10;
     width: 100%;
-    padding: 10px;
-    background: #333;
-    color: white;
+    max-width: 460px;
+    background: var(--bg-canvas);
+    border-radius: 32px;
+    padding: 48px 40px;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    animation: cardPop 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardPop {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Brand Header */
+.auth-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.brand-icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--accent-dark);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 20px rgba(24, 24, 27, 0.25);
+    animation: pulseIcon 3s infinite ease-in-out;
+}
+
+@keyframes pulseIcon {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.auth-brand h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.auth-brand p {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Form Controls */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-field-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-field-group i {
+    position: absolute;
+    left: 18px;
+    color: #a1a1aa;
+    font-size: 16px;
+    transition: color 0.25s ease;
+}
+
+.auth-canvas input {
+    width: 100%;
+    padding: 15px 18px 15px 48px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-canvas input::placeholder {
+    color: #a1a1aa;
+}
+
+.auth-canvas input:focus {
+    outline: none;
+    border-color: var(--accent-dark);
+    box-shadow: 0 0 0 4px rgba(24, 24, 27, 0.08);
+}
+
+.auth-canvas input:focus + i,
+.input-field-group:focus-within i {
+    color: var(--accent-dark);
+}
+
+.auth-canvas button {
+    width: 100%;
+    padding: 15px;
+    background: var(--accent-dark);
+    color: #ffffff;
     border: none;
-    border-radius: 4px;
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 10px 25px rgba(24, 24, 27, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 4px;
+}
+
+.auth-canvas button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(24, 24, 27, 0.3);
+}
+
+.auth-canvas button:active {
+    transform: translateY(0);
+}
+
+.auth-footer-link {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.auth-footer-link a {
+    color: var(--accent-dark);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-footer-link a:hover {
+    text-decoration: underline;
 }
 
 .error {
-    color: red;
-    font-size: 14px;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 10px 14px;
+    border-radius: 12px;
+    display: none;
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.error:not(:empty) {
+    display: block;
 }
 
 .success {
-    color: green;
-    font-size: 14px;
+    color: #16a34a;
+    font-size: 13px;
+    font-weight: 600;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    display: none;
+    animation: fadeIn 0.3s ease-in-out forwards;
 }
 
-.auth-container a {
-    color: #333;
+.success:not(:empty) {
+    display: block;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-4px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 500px) {
+    .auth-canvas {
+        padding: 36px 24px;
+        border-radius: 24px;
+    }
 }

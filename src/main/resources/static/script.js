@@ -53,10 +53,14 @@ async function loadStudents() {
 }
 
 function renderTable(students) {
+    const role = localStorage.getItem("role");
     tableBody.innerHTML = "";
     students.forEach(s => {
         const courseName = s.course ? s.course.name : "—";
         const courseId = s.course ? s.course.id : "";
+        const deleteBtn = role === "ADMIN"
+            ? `<button class="delete" onclick="deleteStudent(${s.id})">Delete</button>`
+            : "";
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${s.id}</td>
@@ -65,7 +69,7 @@ function renderTable(students) {
             <td>${s.email}</td>
             <td>
                 <button class="edit" onclick='editStudent(${s.id}, "${s.name}", "${courseId}", "${s.email}")'>Edit</button>
-                <button class="delete" onclick="deleteStudent(${s.id})">Delete</button>
+                ${deleteBtn}
             </td>
         `;
         tableBody.appendChild(row);

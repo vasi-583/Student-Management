@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div class="sidebar">
+            <h2>Student MS</h2>
+            <nav>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="index.html">Students</a>
+                <a href="courses.html">Courses</a>
+                <a href="attendance.html">Attendance</a>
+                <a href="grades.html">Grades</a>
+            </nav>
+            <div class="logout-link" id="logoutBtn">Logout</div>
+        </div>
+
+        <div class="main">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+            </div>
+
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="label">Total Students</div>
+                    <div class="value" id="statStudents">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Total Courses</div>
+                    <div class="value" id="statCourses">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Avg Grade</div>
+                    <div class="value" id="statGrade">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Attendance Rate</div>
+                    <div class="value" id="statAttendance">—</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-top: 0;">Welcome back, <span id="welcomeUser"></span> 👋</h3>
+                <p style="color: var(--text-secondary); margin-top: 6px; font-size: 0.9rem;">Use the sidebar to manage students, courses, attendance, and grades.</p>
+            </div>
+        </div>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -18,12 +18,12 @@ if (loginForm) {
             });
             const data = await res.json();
 
-            if (data.token) {
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("role", data.role);
-                localStorage.setItem("username", username);
-                window.location.href = "index.html";
-            } else {
+			if (data.token) {
+			    localStorage.setItem("token", data.token);
+			    localStorage.setItem("role", data.role);
+			    localStorage.setItem("username", username);
+			    window.location.href = "dashboard.html";   // changed from index.html
+			} else {
                 errorMsg.textContent = data.error || "Login failed";
             }
         } catch (err) {

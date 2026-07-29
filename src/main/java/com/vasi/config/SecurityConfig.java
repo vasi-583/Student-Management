@@ -2,6 +2,7 @@ package com.vasi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,20 +31,28 @@ public class SecurityConfig {
 	        .csrf(csrf -> csrf.disable())
 	        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	        .authorizeHttpRequests(auth -> auth
-	        .requestMatchers(
-	        			    "/api/auth/**",
+	        		.requestMatchers(
+	        			    "/api/auth/login",
+	        			    "/api/auth/signup",
 	        			    "/",
 	        			    "/index.html",
 	        			    "/login.html",
 	        			    "/signup.html",
 	        			    "/courses.html",
+	        			    "/attendance.html",
+	        			    "/grades.html",
+	        			    "/dashboard.html",
 	        			    "/style.css",
 	        			    "/auth.css",
 	        			    "/script.js",
 	        			    "/auth.js",
 	        			    "/courses.js",
+	        			    "/attendance.js",
+	        			    "/grades.js",
+	        			    "/dashboard.js",
 	        			    "/favicon.ico"
 	        			).permitAll()
+	            .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
 	            .anyRequest().authenticated()
 	        )
 	        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
