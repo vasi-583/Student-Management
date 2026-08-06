@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api/students";
+const API_URL = "/api/students";
 const COURSES_URL = "http://localhost:8080/api/courses";
 
 const token = localStorage.getItem("token");

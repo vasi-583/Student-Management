@@ -5,18 +5,26 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 
 @Component
 public class JwtUtil {
+	@Value("${jwt.secret:vasi-student-management-secret-key-2026-change this}")
+	private String secreString;
 	
-	 private static final String SECRET = "vasi-student-management-secret-key-2026-change-this";
-	 private final SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
-	 private final long EXPIRATIONS_MS = 1000 * 60 *60 * 10; //10 Hrs
+	private SecretKey key;
+	@PostConstruct
+	public void init() {
+		String secretString = null;
+		key = Keys.hmacShaKeyFor(secretString.getBytes(StandardCharsets.UTF_8));
+	}
+	
+ private final long EXPIRATIONS_MS = 1000 * 60 *60 * 10; //10 Hrs
 	
 	public String generateTokens(String username , String role) {
 		return Jwts.builder()
@@ -47,5 +55,6 @@ public class JwtUtil {
 		 return Jwts.parser().verifyWith(key).build()
 		            .parseSignedClaims(token).getPayload().get("role", String.class);
 	}
+	
 	
 }
