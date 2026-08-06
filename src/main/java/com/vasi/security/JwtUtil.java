@@ -14,13 +14,12 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 public class JwtUtil {
-	@Value("${jwt.secret:vasi-student-management-secret-key-2026-change this}")
-	private String secreString;
+	@Value("${jwt.secret:vasi-student-management-secret-key-2026-change-this}")
+	private String secretString;
 	
 	private SecretKey key;
 	@PostConstruct
 	public void init() {
-		String secretString = null;
 		key = Keys.hmacShaKeyFor(secretString.getBytes(StandardCharsets.UTF_8));
 	}
 	
