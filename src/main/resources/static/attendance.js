@@ -1,5 +1,5 @@
-const ATTENDANCE_URL = "http://localhost:8080/api/attendance";
-const STUDENTS_URL = "http://localhost:8080/api/students";
+const ATTENDANCE_URL = "/api/attendance";
+const STUDENTS_URL = "/api/students";
 
 const token = localStorage.getItem("token");
 if (!token) {

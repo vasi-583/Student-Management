@@ -1,4 +1,4 @@
-const STATS_URL = "http://localhost:8080/api/dashboard/stats";
+const STATS_URL = "/api/dashboard/stats";
 
 const token = localStorage.getItem("token");
 if (!token) {

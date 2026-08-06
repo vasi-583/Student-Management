@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8080/api/auth";
+const API_BASE = "/api/auth";
 
 const loginForm = document.getElementById("loginForm");
 const signupForm = document.getElementById("signupForm");

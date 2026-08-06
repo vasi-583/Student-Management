@@ -1,5 +1,5 @@
-const GRADES_URL = "http://localhost:8080/api/grades";
-const STUDENTS_URL = "http://localhost:8080/api/students";
+const GRADES_URL = "/api/grades";
+const STUDENTS_URL = "/api/students";
 
 const token = localStorage.getItem("token");
 if (!token) {
