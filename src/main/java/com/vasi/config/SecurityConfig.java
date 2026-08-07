@@ -51,7 +51,8 @@ public class SecurityConfig {
 	        			    "/grades.js",
 	        			    "/dashboard.js",
 	        			    "/favicon.ico",
-	        			    "/favicon.svg"
+	        			    "/favicon.svg",
+	        			    "/error"
 	        			).permitAll()
 	            .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
 	            .anyRequest().authenticated()
